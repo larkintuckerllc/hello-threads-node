@@ -4,7 +4,8 @@ const services = require('./helloworld/helloworld_grpc_pb');
 
 const sayHello = (call, callback) => {
   const reply = new messages.HelloReply();
-  reply.setMessage('Hello ' + call.request.getName());
+  const name = call.request.getName();
+  reply.setMessage(`Hello ${name}`);
   callback(null, reply);
 }
   
