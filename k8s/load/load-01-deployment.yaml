@@ -9,6 +9,7 @@ spec:
   - image: qarlm/ghz
     name: load
     args:
+    - --proto=/tmp/helloworld.proto
     - --insecure
     - --call
     - helloworld.Greeter.SayHello
@@ -26,5 +27,12 @@ spec:
       limits:
         memory: "500Mi"
         cpu: "4"
+    volumeMounts:
+    - name: config
+      mountPath: /tmp/helloworld.proto
+      subPath: helloworld.proto
   restartPolicy: Never
-
+  volumes:
+  - name: config
+    configMap:
+      name: load
